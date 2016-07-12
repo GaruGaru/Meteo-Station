@@ -35,4 +35,8 @@ public class WeatherStationProvider extends WeatherStation {
         return this;
     }
 
+    public WeatherStationProvider build() {
+        return this;
+    }
+
 }

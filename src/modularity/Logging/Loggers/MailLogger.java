@@ -1,6 +1,7 @@
 package modularity.Logging.Loggers;
 
 import modularity.Logging.ILogger;
+import modularity.Logging.LogLevel;
 import modularity.Networking.smtp.Mail;
 import modularity.Networking.smtp.Smtp;
 import modularity.Networking.smtp.SmtpAuth;
@@ -71,6 +72,11 @@ public class MailLogger implements ILogger {
     public void error(String tag, Throwable error) {
         Mail errorReport = MailUtils.getErrorReport(nameTag + ": " + tag, error, mails);
         Smtp.get().send(auth, errorReport);
+    }
+
+    @Override
+    public void setLogLevel(LogLevel logLevel) {
+
     }
 
 

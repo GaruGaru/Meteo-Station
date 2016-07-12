@@ -45,4 +45,9 @@ public class Logger implements ILogger {
     public void error(String tag, Throwable error) {
         loggerList.forEach(l -> l.error(tag, error));
     }
+
+    @Override
+    public void setLogLevel(LogLevel logLevel) {
+        loggerList.forEach(l -> l.setLogLevel(logLevel));
+    }
 }

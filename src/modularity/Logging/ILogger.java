@@ -13,4 +13,6 @@ public interface ILogger {
 
     void error(String tag, Throwable error);
 
+    void setLogLevel(LogLevel logLevel);
+
 }

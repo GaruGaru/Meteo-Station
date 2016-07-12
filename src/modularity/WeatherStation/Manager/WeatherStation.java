@@ -25,6 +25,7 @@ public class WeatherStation implements ISerialListener {
     private IMessageDecoder<String, WeatherEntry> messageDecoder;
 
     private List<IStationTask> tasks;
+    private Thread communicatorThread;
 
     public WeatherStation() {
         this.tasks = new LinkedList<>();
@@ -57,9 +58,18 @@ public class WeatherStation implements ISerialListener {
         Logger.get().debug("WeatherStation", "Tasks: " + Arrays.asList(tasks.toArray(new IStationTask[tasks.size()])));
     }
 
+    public void beginAsync() {
+        this.communicatorThread = new Thread(this::begin);
+        this.communicatorThread.start();
+    }
+
 
     public void stop() {
         this.serialCommunicator.endCommunication();
+        if (this.communicatorThread != null) {
+            this.communicatorThread.interrupt();
+            this.communicatorThread = null;
+        }
     }
 
 
