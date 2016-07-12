@@ -1,0 +1,13 @@
+{
+  "platform": "unknown",
+  "name": "test-station",
+  "admin_mails": [
+    "meteostation.bot@gmail.com"
+  ],
+  "smtpAuth": {
+    "user": "meteostation.bot@gmail.com",
+    "password": "gy2phyn41mvz",
+    "smtpServer": "smtp.gmail.com",
+    "smtpPort": "587"
+  }
+}
