@@ -17,7 +17,7 @@ public class TextUtils {
     }
 
     public static String streamToString(InputStream stream) {
-        if(stream == null) return null;
+        if (stream == null) return null;
         String content = "";
         Scanner scanner = new Scanner(stream);
         while (scanner.hasNext()) {

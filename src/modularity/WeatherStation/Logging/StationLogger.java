@@ -13,6 +13,10 @@ public class StationLogger extends Logger {
 
     private static ILogger logger = null;
 
+    private StationLogger(MeteoConfiguration config) {
+        super(new MailLogger(config.getName(), config.getSmtpAuth(), config.getAdminMails()), new ConsoleLogger());
+    }
+
     public static ILogger create(MeteoConfiguration configuration) {
         logger = new StationLogger(configuration);
         return get();
@@ -20,9 +24,5 @@ public class StationLogger extends Logger {
 
     public static ILogger get() {
         return logger;
-    }
-
-    private StationLogger(MeteoConfiguration config) {
-        super(new MailLogger(config.getName(), config.getSmtpAuth(), config.getAdminMails()), new ConsoleLogger());
     }
 }

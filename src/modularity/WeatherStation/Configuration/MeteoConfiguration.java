@@ -17,11 +17,6 @@ public class MeteoConfiguration {
     private String name;
 
     private SmtpAuth smtpAuth;
-
-    public SmtpAuth getSmtpAuth() {
-        return smtpAuth;
-    }
-
     @SerializedName("admin_mails")
     private String[] adminMails;
 
@@ -30,6 +25,10 @@ public class MeteoConfiguration {
         this.platform = platform;
         this.smtpAuth = smtpAuth;
         this.adminMails = adminMails;
+    }
+
+    public SmtpAuth getSmtpAuth() {
+        return smtpAuth;
     }
 
     public String getName() {

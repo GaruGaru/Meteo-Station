@@ -50,12 +50,12 @@ public class ConsoleLogger implements ILogger {
         this.error(tag, error.getLocalizedMessage());
     }
 
-    public void setLogLevel(LogLevel logLevel) {
-        this.logLevel = logLevel;
-    }
-
     public LogLevel getLogLevel() {
         return logLevel;
+    }
+
+    public void setLogLevel(LogLevel logLevel) {
+        this.logLevel = logLevel;
     }
 
     enum LogLevel {

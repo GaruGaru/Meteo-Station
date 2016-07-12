@@ -44,13 +44,12 @@ public class WeatherStation implements ISerialListener {
         Collections.addAll(this.tasks, tasks);
     }
 
+    public MeteoConfiguration getConfiguration() {
+        return configuration;
+    }
 
     public void setConfiguration(MeteoConfiguration configuration) {
         this.configuration = configuration;
-    }
-
-    public MeteoConfiguration getConfiguration() {
-        return configuration;
     }
 
     public void begin() {

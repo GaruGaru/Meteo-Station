@@ -15,11 +15,11 @@ import java.util.Map;
  */
 public class UploadRemote implements IStationTask {
 
+    private static final String URL = "http://meteostationbot.altervista.org/add_meteo_entry.php";
+
     public static IStationTask create() {
         return new UploadRemote();
     }
-
-    private static final String URL = "http://meteostationbot.altervista.org/add_meteo_entry.php";
 
     private Map<String, String> getParams(WeatherStation manager, WeatherEntry entry) {
         Map<String, String> map = new LinkedHashMap<>();

@@ -10,6 +10,12 @@ import java.util.List;
 public class Logger implements ILogger {
 
     private static ILogger logger = null;
+    private List<ILogger> loggerList;
+
+    public Logger(ILogger... loggers) {
+        this.loggerList = new ArrayList<>(3);
+        Collections.addAll(this.loggerList, loggers);
+    }
 
     public static ILogger instance(ILogger instance) {
         logger = instance;
@@ -18,13 +24,6 @@ public class Logger implements ILogger {
 
     public static ILogger get() {
         return logger;
-    }
-
-    private List<ILogger> loggerList;
-
-    public Logger(ILogger... loggers) {
-        this.loggerList = new ArrayList<>(3);
-        Collections.addAll(this.loggerList, loggers);
     }
 
     @Override
