@@ -9,7 +9,7 @@ public class Http {
 
     public static IHttp get() {
         if (instanace == null)
-            instanace = new HTTPExecutor();
+            instanace = new HttpExecutor();
 
         return instanace;
     }

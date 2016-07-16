@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by Tommaso Garuglieri on 10/07/2016.
  */
-public class HTTPExecutor implements IHttp {
+public class HttpExecutor implements IHttp {
 
     private HttpResponse executePost(HttpRequest request) {
 
@@ -41,7 +41,7 @@ public class HTTPExecutor implements IHttp {
 
             return new HttpResponse(responseCode, content, responseCode >= 200 && responseCode < 300);
         } catch (Exception e) {
-            return new HttpResponse(0, e.getMessage(), false);
+            return HttpResponse.create(e);
         }
     }
 

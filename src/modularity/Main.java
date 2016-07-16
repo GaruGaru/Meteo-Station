@@ -37,7 +37,7 @@ public class Main {
                 .dataSource(getSerialMock())
                 .decodeWith(WeatherDecoder.create())
                 .task(TASKS)
-                .usingConfiguration(configuration)
+                .configuration(configuration)
                 .build();
 
         station.beginAsync();

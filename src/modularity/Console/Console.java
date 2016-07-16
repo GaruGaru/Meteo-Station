@@ -45,19 +45,29 @@ public class Console {
         String input = "";
         Scanner scanner = new Scanner(System.in);
         while (!input.equals("exit")) {
-
             input = scanner.nextLine().toLowerCase();
-
-            String[] splittedInput = input.split(" ");
-
-            Command command = getCommand(splittedInput[0]);
-            if (command != null) {
-                command.execute(splittedInput);
-            } else {
-                System.out.println(splittedInput[0] + " not a valid command");
+            if (input.equals("help"))
+                help();
+            else {
+                handleCommand(input);
             }
-
         }
+    }
+
+    private void handleCommand(String input) {
+        String[] outputSplit = input.split(" ");
+
+        Command command = getCommand(outputSplit[0]);
+        if (command != null) {
+            command.execute(outputSplit);
+        } else {
+            System.out.println(outputSplit[0] + " not a valid command");
+        }
+    }
+
+    private void help() {
+        for (Command command : commandList)
+            System.out.println(command.getName() + " " + command.getHelp());
     }
 
 }

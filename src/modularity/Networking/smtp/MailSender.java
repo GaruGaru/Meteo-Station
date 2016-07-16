@@ -20,8 +20,6 @@ public class MailSender implements IMailSender {
 
     @Override
     public boolean send(SmtpAuth auth, Mail mail) {
-
-
         if (validAuth(auth)) {
             String[] recipients = mail.getRecipients();
 
@@ -58,10 +56,12 @@ public class MailSender implements IMailSender {
                     return true;
 
                 } catch (MessagingException e) {
-                    Logger.get().error("MailSender", e);
+                    Logger.get().debug("MailSender", e.getMessage());
                     return false;
                 }
             }
+        } else {
+            Logger.get().debug("MailSender", "Unable to report exception, auth not defined");
         }
         return false;
     }

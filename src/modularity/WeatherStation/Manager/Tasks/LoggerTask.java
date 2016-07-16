@@ -2,6 +2,7 @@ package modularity.WeatherStation.Manager.Tasks;
 
 
 import modularity.Logging.Logger;
+import modularity.Utils.Json;
 import modularity.WeatherStation.Manager.WeatherStation;
 import modularity.WeatherStation.MessageDecoder.WeatherEntry;
 
@@ -19,7 +20,7 @@ public class LoggerTask implements IStationTask {
     @Override
     public void onEntry(WeatherStation manager, WeatherEntry entry) {
         Logger.get().info(TAG, "New entry");
-        Logger.get().debug(TAG, entry.toString());
+        Logger.get().debug(TAG, Json.get().toJson(entry));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class LoggerTask implements IStationTask {
 
 
     private void println(String message) {
-        Logger.get().info(TAG, message);
+        Logger.get().debug(TAG, message);
     }
 
 

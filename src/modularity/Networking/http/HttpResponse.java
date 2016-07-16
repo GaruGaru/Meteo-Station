@@ -8,11 +8,14 @@ public class HttpResponse {
     private int statusCode;
     private String body;
     private boolean success;
-
     public HttpResponse(int statusCode, String body, boolean success) {
         this.statusCode = statusCode;
         this.body = body;
         this.success = success;
+    }
+
+    public static HttpResponse create(Throwable e) {
+        return new HttpResponse(0, e.toString(), false);
     }
 
     public int getStatusCode() {

@@ -25,7 +25,7 @@ public class WeatherStationProvider extends WeatherStation {
         return this;
     }
 
-    public WeatherStationProvider usingConfiguration(MeteoConfiguration configuration) {
+    public WeatherStationProvider configuration(MeteoConfiguration configuration) {
         setConfiguration(configuration);
         return this;
     }

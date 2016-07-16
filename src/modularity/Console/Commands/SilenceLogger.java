@@ -23,4 +23,9 @@ public class SilenceLogger implements Command {
     public String getName() {
         return "silence";
     }
+
+    @Override
+    public String getHelp() {
+        return "Silence console";
+    }
 }

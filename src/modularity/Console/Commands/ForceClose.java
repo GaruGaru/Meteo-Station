@@ -20,4 +20,9 @@ public class ForceClose implements Command {
     public String getName() {
         return "panic";
     }
+
+    @Override
+    public String getHelp() {
+        return "Instant close";
+    }
 }

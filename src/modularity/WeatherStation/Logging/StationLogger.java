@@ -9,6 +9,7 @@ import modularity.WeatherStation.Configuration.MeteoConfiguration;
 /**
  * Created by Tommaso Garuglieri on 12/07/2016.
  */
+
 public class StationLogger extends Logger {
 
     private static ILogger logger = null;

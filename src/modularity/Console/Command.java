@@ -9,4 +9,6 @@ public interface Command {
 
     String getName();
 
+    String getHelp();
+
 }
