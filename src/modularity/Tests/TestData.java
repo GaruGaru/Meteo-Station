@@ -1,4 +1,4 @@
-package modularity.WeatherStation.Tests;
+package modularity.Tests;
 
 /**
  * Created by Tommaso Garuglieri on 08/09/2016.

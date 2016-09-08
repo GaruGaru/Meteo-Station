@@ -1,4 +1,4 @@
-package modularity.WeatherStation.Tests;
+package modularity.Tests;
 
 import modularity.WeatherStation.MessageDecoder.WeatherDecoder;
 import modularity.WeatherStation.MessageDecoder.WeatherEntry;
