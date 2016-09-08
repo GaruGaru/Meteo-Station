@@ -8,6 +8,7 @@ import modularity.Console.Console;
 import modularity.Logging.Logger;
 import modularity.Serial.ISerial;
 import modularity.Serial.RXTX.RXTXSerialUtils;
+import modularity.Utils.Json;
 import modularity.WeatherStation.Configuration.MeteoConfiguration;
 import modularity.WeatherStation.Configuration.MeteoConfigurationLoader;
 import modularity.WeatherStation.Logging.StationLogger;
@@ -34,11 +35,13 @@ public class Main {
 
         WeatherStation station = WeatherStationProvider
                 .create()
-                .dataSource(getSerialMock())
+                .dataSource((configuration.isDebug() ? getSerialMock() : getSerial()))
                 .decodeWith(WeatherDecoder.create())
                 .task(TASKS)
                 .configuration(configuration)
                 .build();
+
+        Logger.get().info("Configuration", Json.get().toJson(configuration));
 
         station.beginAsync();
 
@@ -54,9 +57,9 @@ public class Main {
 
     private static void init() {
         configuration = loadConfiguration();
-        handleConfiguration(configuration);
         Logger.instance(StationLogger.create(configuration));
         AutoExceptionHandler.bindOnThread();
+        handleConfiguration(configuration);
     }
 
     private static MeteoConfiguration loadConfiguration() {
@@ -65,8 +68,10 @@ public class Main {
     }
 
     private static void handleConfiguration(MeteoConfiguration configuration) {
-        if (configuration.getPlatform().equals("raspberry"))
+        if (configuration.getPlatform().equals("raspberry")) {
             RXTXSerialUtils.raspberryWorkaround();
+            Logger.get().info("Configuration", "#Raspberry workaround");
+        }
     }
 
     private static ISerial getSerialMock() {

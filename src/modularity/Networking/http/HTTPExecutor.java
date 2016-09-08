@@ -31,6 +31,7 @@ public class HttpExecutor implements IHttp {
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Content-Length", String.valueOf(postDataBytes.length));
             conn.setDoOutput(true);
@@ -41,6 +42,7 @@ public class HttpExecutor implements IHttp {
 
             return new HttpResponse(responseCode, content, responseCode >= 200 && responseCode < 300);
         } catch (Exception e) {
+
             return HttpResponse.create(e);
         }
     }

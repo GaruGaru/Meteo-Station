@@ -14,6 +14,12 @@ public class HttpResponse {
         this.success = success;
     }
 
+    public HttpResponse(int statusCode, String body) {
+        this.statusCode = statusCode;
+        this.body = body;
+        this.success = statusCode >= 200 && statusCode < 400;
+    }
+
     public static HttpResponse create(Throwable e) {
         return new HttpResponse(0, e.toString(), false);
     }
@@ -32,6 +38,6 @@ public class HttpResponse {
 
     @Override
     public String toString() {
-        return "Response: " + statusCode + " Content: " + body;
+        return "Response: " + statusCode + " - Content: " + body;
     }
 }

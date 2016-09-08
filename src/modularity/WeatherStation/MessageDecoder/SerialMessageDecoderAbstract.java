@@ -22,8 +22,11 @@ public abstract class SerialMessageDecoderAbstract<R> implements IMessageDecoder
     private static final int RAIN_QUANTITY = 6;
     private static final int LIGHT = 7;
 
-
     private static final String REGEX = "/";
+
+    public static boolean validMessage(String message) {
+        return message != null && !message.isEmpty() && message.split(REGEX).length == MESSAGE_SIZE;
+    }
 
     public float[] getValues(String message) {
         if (TextUtils.isEmpty(message))

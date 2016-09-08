@@ -6,17 +6,19 @@ package modularity.WeatherStation.MessageDecoder;
 
 public class WeatherEntry {
 
+    private static final int INVALID = -1;
+
     private static final int RAIN_THRESHOLD = 900;
 
-    private long time;
-    private float temperature;
-    private float humidity;
-    private float pressure;
-    private float windSpeed;
-    private float windDirection;
-    private float rain;
-    private float rainQuantity;
-    private float light;
+    private long time = INVALID;
+    private float temperature = INVALID;
+    private float humidity = INVALID;
+    private float pressure = INVALID;
+    private float windSpeed = INVALID;
+    private float windDirection = INVALID;
+    private float rain = INVALID;
+    private float rainQuantity = INVALID;
+    private float light = INVALID;
 
 
     public WeatherEntry(float temperature, float humidity, float pressure, float windSpeed, float windDirection, float rain, float rainQuantity, float light) {

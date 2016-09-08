@@ -17,9 +17,8 @@ public class MeteoConfigurationLoader extends JConfigurationLoader<MeteoConfigur
     @Override
     protected String getConfigurationContent() {
         String path = "./" + configurationFile;
-        FileInputStream fis = null;
         try {
-            fis = new FileInputStream(path);
+            FileInputStream fis = new FileInputStream(path);
             return streamToString(fis);
         } catch (FileNotFoundException e) {
             return null;

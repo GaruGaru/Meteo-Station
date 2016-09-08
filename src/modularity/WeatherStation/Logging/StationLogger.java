@@ -14,12 +14,23 @@ public class StationLogger extends Logger {
 
     private static ILogger logger = null;
 
-    private StationLogger(MeteoConfiguration config) {
-        super(new MailLogger(config.getName(), config.getSmtpAuth(), config.getAdminMails()), new ConsoleLogger());
+    private StationLogger(ILogger... loggers) {
+        super(loggers);
     }
 
     public static ILogger create(MeteoConfiguration configuration) {
-        logger = new StationLogger(configuration);
+        ILogger[] loggers = new ILogger[]{
+                new ConsoleLogger(),
+                new MailLogger(configuration.getName(), configuration.getSmtpAuth(), configuration.getAdminMails())
+        };
+
+        ILogger[] debugLoggers = new ILogger[]{
+                new ConsoleLogger(),
+                new MailLogger(configuration.getName(), configuration.getSmtpAuth(), configuration.getAdminMails())
+        };
+
+
+        logger = new StationLogger(configuration.isDebug() ? debugLoggers : loggers);
         return get();
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class MailLogger implements ILogger {
 
-    private static final int LOG_FLUSH_MAX_SIZE = 100;
+    private static final int LOG_FLUSH_MAX_SIZE = 50;
 
     private final String nameTag;
 
@@ -31,17 +31,6 @@ public class MailLogger implements ILogger {
         this.auth = auth;
     }
 
-    private void addLogEntry(String tag, String log) {
-        this.logEntryList.add(new LogEntry(tag, log));
-        sendLogIfNeeded();
-    }
-
-    private void sendLogIfNeeded() {
-        if (logEntryList.size() >= LOG_FLUSH_MAX_SIZE) {
-            sendLogReport(logEntryList);
-            logEntryList.clear();
-        }
-    }
 
     private void sendLogReport(List<LogEntry> logEntryList) {
         String logToString = nameTag + " report at " + new Date().toString();
@@ -54,12 +43,10 @@ public class MailLogger implements ILogger {
 
     @Override
     public void info(String tag, String info) {
-        addLogEntry(nameTag + ": " + tag, info);
     }
 
     @Override
     public void debug(String tag, String debug) {
-        addLogEntry(nameTag + ": " + tag, debug);
     }
 
     @Override

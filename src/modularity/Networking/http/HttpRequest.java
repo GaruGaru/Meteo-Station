@@ -1,5 +1,6 @@
 package modularity.Networking.http;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -13,6 +14,10 @@ public class HttpRequest {
     public HttpRequest(String url, Map<String, String> params) {
         this.url = url;
         this.params = params;
+    }
+
+    public HttpRequest(String url) {
+        this(url, new LinkedHashMap<>());
     }
 
     public Map<String, String> getParams() {

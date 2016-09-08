@@ -9,7 +9,7 @@ import modularity.WeatherStation.MessageDecoder.WeatherEntry;
  */
 public class UploadRemote implements IStationTask {
 
-    private static final String url = "http://gmeteostationbot.altervista.org/add_meteo_entry.php";
+    private static final String url = "http://meteostationbot.altervista.org/StationApi/insert.php";
 
     private EntryUploader remoteUploader;
 

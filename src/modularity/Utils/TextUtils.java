@@ -11,9 +11,17 @@ public class TextUtils {
         return (charSequence == null || charSequence.length() == 0);
     }
 
-    public static String shorten(String str, int len) {
-        if (str.length() <= len) return str;
-        return str.substring(0, len - 3) + "...";
+    public static String shorten(String str, int maxLen) {
+        if (str == null)
+            throw new RuntimeException("Can't shorten a null string");
+        if (maxLen < 0)
+            return "maxLen parameter can't be < 0";
+        if (maxLen == 0)
+            return "";
+        if (maxLen - 3 < 0)
+            return str.substring(0, maxLen);
+        if (str.length() <= maxLen) return str;
+        return str.substring(0, maxLen - 3) + "...";
     }
 
     public static String streamToString(InputStream stream) {

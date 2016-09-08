@@ -5,13 +5,13 @@ package modularity.Networking.http;
  */
 public class Http {
 
-    private static IHttp instanace;
+    private static IHttp instance;
 
     public static IHttp get() {
-        if (instanace == null)
-            instanace = new HttpExecutor();
+        if (instance == null)
+            instance = new HttpExecutor();
 
-        return instanace;
+        return instance;
     }
 
 }

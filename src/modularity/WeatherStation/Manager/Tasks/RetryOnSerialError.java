@@ -1,7 +1,8 @@
 package modularity.WeatherStation.Manager.Tasks;
 
 
-import modularity.Threading.PostDelayedTask;
+import modularity.Threading.IDelayedExecutor;
+import modularity.Threading.TimerExecutor;
 import modularity.WeatherStation.Manager.WeatherStation;
 import modularity.WeatherStation.MessageDecoder.WeatherEntry;
 
@@ -11,7 +12,7 @@ import modularity.WeatherStation.MessageDecoder.WeatherEntry;
 public class RetryOnSerialError implements IStationTask {
 
     public static final int MAX_RETRIES = 2;
-    private static final long TIMEOUT = 2000;
+    private static final int TIMEOUT = 2000;
     private int retries;
 
     public RetryOnSerialError() {
@@ -33,7 +34,8 @@ public class RetryOnSerialError implements IStationTask {
             if (this.retries < MAX_RETRIES) {
                 this.retries++;
                 manager.stop();
-                PostDelayedTask.runDelayed(manager::begin, TIMEOUT);
+                IDelayedExecutor delayedExecutor = new TimerExecutor();
+                delayedExecutor.schedule(manager::begin, TIMEOUT);
                 manager.onEvent(this, "RetryOnSerialError error, scheduling new retry after " + TIMEOUT + " seconds");
             } else {
                 manager.onEvent(this, "RetryOnSerialError - Max retries attempts reached");
