@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_meteo-station" default="compile.module.meteo-station">
+    <dirname property="module.meteo-station.basedir" file="${ant.file.module_meteo-station}"/>
+
+    <property name="module.jdk.home.meteo-station" value="${project.jdk.home}"/>
+    <property name="module.jdk.bin.meteo-station" value="${project.jdk.bin}"/>
+    <property name="module.jdk.classpath.meteo-station" value="${project.jdk.classpath}"/>
+
+    <property name="compiler.args.meteo-station" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+
+    <property name="meteo-station.output.dir" value="${module.meteo-station.basedir}/out/production/Meteo-Station"/>
+    <property name="meteo-station.testoutput.dir" value="${module.meteo-station.basedir}/out/test/Meteo-Station"/>
+
+    <path id="meteo-station.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="meteo-station.module.production.classpath">
+        <path refid="${module.jdk.classpath.meteo-station}"/>
+        <path refid="library.rxtxcomm.classpath"/>
+        <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+        <path refid="library.gson-2.7.classpath"/>
+        <path refid="library.mail-1.5.0-b01.classpath"/>
+    </path>
+
+    <path id="meteo-station.runtime.production.module.classpath">
+        <pathelement location="${meteo-station.output.dir}"/>
+        <path refid="library.rxtxcomm.classpath"/>
+        <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+        <path refid="library.gson-2.7.classpath"/>
+        <path refid="library.mail-1.5.0-b01.classpath"/>
+    </path>
+
+    <path id="meteo-station.module.classpath">
+        <path refid="${module.jdk.classpath.meteo-station}"/>
+        <pathelement location="${meteo-station.output.dir}"/>
+        <path refid="library.rxtxcomm.classpath"/>
+        <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+        <path refid="library.gson-2.7.classpath"/>
+        <path refid="library.mail-1.5.0-b01.classpath"/>
+    </path>
+
+    <path id="meteo-station.runtime.module.classpath">
+        <pathelement location="${meteo-station.testoutput.dir}"/>
+        <pathelement location="${meteo-station.output.dir}"/>
+        <path refid="library.rxtxcomm.classpath"/>
+        <pathelement location="${basedir}/lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="${basedir}/lib/junit-4.12.jar"/>
+        <path refid="library.gson-2.7.classpath"/>
+        <path refid="library.mail-1.5.0-b01.classpath"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.meteo-station">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.meteo-station">
+        <patternset refid="excluded.from.module.meteo-station"/>
+    </patternset>
+
+    <path id="meteo-station.module.sourcepath">
+        <dirset dir="${module.meteo-station.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.meteo-station"
+            depends="compile.module.meteo-station.production,compile.module.meteo-station.tests"
+            description="Compile module Meteo-Station"/>
+
+    <target name="compile.module.meteo-station.production" depends="register.custom.compilers"
+            description="Compile module Meteo-Station; production classes">
+        <mkdir dir="${meteo-station.output.dir}"/>
+        <javac2 destdir="${meteo-station.output.dir}" debug="${compiler.debug}"
+                nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true"
+                executable="${module.jdk.bin.meteo-station}/javac">
+            <compilerarg line="${compiler.args.meteo-station}"/>
+            <bootclasspath refid="meteo-station.module.bootclasspath"/>
+            <classpath refid="meteo-station.module.production.classpath"/>
+            <src refid="meteo-station.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.meteo-station"/>
+        </javac2>
+
+        <copy todir="${meteo-station.output.dir}">
+            <fileset dir="${module.meteo-station.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.meteo-station.tests"
+            depends="register.custom.compilers,compile.module.meteo-station.production"
+            description="compile module Meteo-Station; test classes" unless="skip.tests"/>
+
+    <target name="clean.module.meteo-station" description="cleanup module">
+        <delete dir="${meteo-station.output.dir}"/>
+        <delete dir="${meteo-station.testoutput.dir}"/>
+    </target>
+</project>
